@@ -1,0 +1,114 @@
+:root {
+    --body-off-white-bgc: #eeeeee;
+    --off-black: #080808;
+    --border-off-black: #222222;
+    --selection-yellow: rgba(255, 195, 0, 75%);
+    --tomato-red: #c50000;
+
+    --playing-grid-width: 500px;
+    --playing-grid-height: 450px;
+    --black-border: 5px solid var(--border-off-black);
+}
+
+body {
+    background: var(--body-off-white-bgc);
+}
+
+/* Title CSS Source: https://codepen.io/vedadesigns/pen/GPxYZg */
+
+.title {
+    position: relative;
+    width: 90%;
+    max-width: 750px;
+    padding: 2em;
+    margin: 0.5rem auto;
+}
+
+.title h1 {
+    position: relative;
+    padding: 0;
+    margin: 0;
+    font-family: "Raleway", sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    color: var(--off-black);
+    -webkit-transition: all 0.4s ease 0s;
+    -o-transition: all 0.4s ease 0s;
+    transition: all 0.4s ease 0s;
+}
+
+.title h1 {
+    position: relative;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+    width: 150px;
+    text-align: center;
+    margin: auto;
+    white-space: nowrap;
+    border: 2px solid var(--border-off-black);
+    padding: 5px 11px 3px 11px;
+}
+
+.title h1:before,
+.title h1:after {
+    background-color: var(--tomato-red);
+    position: absolute;
+    content: '';
+    height: 7px;
+
+    width: 7px;
+    border-radius: 50%;
+    bottom: 12px;
+}
+
+.title h1:before {
+    left: -20px;
+}
+
+.title h1:after {
+    right: -20px;
+}
+
+.title h1::selection {
+    background-color: var(--selection-yellow);
+}
+
+.title {
+    scale: 150%;
+    transition: transform 0.2s ease-out;
+}
+
+.title:hover {
+    transform: scale(105%);
+    cursor: default;
+}
+
+.playing-grid {
+    width: var(--playing-grid-width);
+    max-width: 500px;
+    height: var(--playing-grid-height);
+    max-height: 500px;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5px;
+
+    cursor: pointer;
+}
+
+.playing-grid .square {
+    border: var(--black-border);
+    transition: scale 0.15s ease-in-out;
+}
+
+.playing-grid .square:hover {
+    scale: 95%;
+}
