@@ -8,6 +8,7 @@
     <title>Odin Tic Tac Toe</title>
     <link rel="stylesheet" href="styles.css">
     <script src="tic-tac-toe-script.js" defer></script>
+    <script src="https://kit.fontawesome.com/77a705ab90.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -15,9 +16,16 @@
 <div class="title">
     <h1>Tic-Tac-Toe</h1>
 </div>
+<div class="vs-selector">
+    <span>vs. </span>
+    <select name="player-type" id="player-type-drop-down">
+        <option value="player">Player</option>
+        <option value="CPU">CPU</option>
+    </select>
+</div>
 <div class="playing-grid">
-    <div class="square 0"></div>
-    <div class="square 1"></div>
+    <div class="square 0"><i class="fa-solid fa-x"></i></div>
+    <div class="square 1"><i class="fa-regular fa-circle"></i></div>
     <div class="square 2"></div>
     <div class="square 3"></div>
     <div class="square 4"></div>

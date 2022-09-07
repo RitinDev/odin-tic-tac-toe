@@ -1,4 +1,5 @@
 :root {
+    @import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
     --body-off-white-bgc: #eeeeee;
     --off-black: #080808;
     --border-off-black: #222222;
@@ -8,6 +9,8 @@
     --playing-grid-width: 500px;
     --playing-grid-height: 450px;
     --black-border: 5px solid var(--border-off-black);
+
+    --preferred-font: 'Raleway';
 }
 
 body {
@@ -28,7 +31,7 @@ body {
     position: relative;
     padding: 0;
     margin: 0;
-    font-family: "Raleway", sans-serif;
+    font-family: var(--preferred-font), sans-serif;
     font-weight: 300;
     font-size: 40px;
     color: var(--off-black);
@@ -85,6 +88,44 @@ body {
     cursor: default;
 }
 
+.vs-selector {
+    position: absolute;
+    top: 18%;
+    left: 49.5%;
+    transform: translate(-50%, -50%);
+    transition: scale 0.1s ease-in-out;
+}
+
+.vs-selector:hover {
+    scale: 105%;
+}
+
+.vs-selector span {
+    font-family: var(--preferred-font), sans-serif;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
+
+.vs-selector select {
+    width: 160px;
+    height: 40px;
+
+    border-radius: 0%;
+    border: var(--black-border);
+    border-width: 3px;
+    background-color: var(--body-off-white-bgc);
+
+    padding: 0;
+    margin: 0;
+
+    font-family: var(--preferred-font), sans-serif;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-align: center;
+
+    cursor: pointer;
+}
+
 .playing-grid {
     width: var(--playing-grid-width);
     max-width: 500px;
@@ -92,7 +133,7 @@ body {
     max-height: 500px;
 
     position: absolute;
-    top: 50%;
+    top: 52.5%;
     left: 50%;
     transform: translate(-50%, -50%);
 
@@ -104,9 +145,27 @@ body {
     cursor: pointer;
 }
 
+/* Remove Arrow from Select Menu */
+.vs-selector select {
+    /* for Firefox */
+    -moz-appearance: none;
+    /* for Chrome */
+    -webkit-appearance: none;
+}
+
+/* For IE10 */
+.vs-selector select::-ms-expand {
+    display: none;
+}
+
 .playing-grid .square {
     border: var(--black-border);
     transition: scale 0.15s ease-in-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 5rem;
 }
 
 .playing-grid .square:hover {
