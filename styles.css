@@ -13,6 +13,10 @@
     --preferred-font: 'Raleway';
 }
 
+*::selection {
+    background-color: var(--selection-yellow);
+}
+
 body {
     background: var(--body-off-white-bgc);
 }
@@ -72,10 +76,6 @@ body {
 
 .title h1:after {
     right: -20px;
-}
-
-.title h1::selection {
-    background-color: var(--selection-yellow);
 }
 
 .title {
