@@ -19,11 +19,7 @@ let Gameboard = (() => {
         }
     }
 
-    let getSquare = (index) => {
-        return gridSquares[index];
-    }
-
-    return { createPlayingGrid, getSquare }
+    return { createPlayingGrid }
 })();
 
 // Factory function to produce players
@@ -59,7 +55,7 @@ let Game = (() => {
             squareClicked.innerHTML = currentPlayer.getMark();
             squareClicked.setAttribute('id', currentPlayer.getNumber());
             // Check if the game has ended or not
-            hasGameEnded(squareClicked);
+            hasGameEnded();
             // Change Player
             if (currentPlayer === playerOne) currentPlayer = playerTwo;
             else currentPlayer = playerOne;
