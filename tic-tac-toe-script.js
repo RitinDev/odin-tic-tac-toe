@@ -52,15 +52,17 @@ let Game = (() => {
 
     // Function to play each turn of the game, check if game ended or not, and proceed to next turn
     playGame = (e) => {
-        if (e.target.classList.contains('square') && e.target.innerHTML === '') {
+        let squareClicked = e.target;
+        let squareEmpty = squareClicked.classList.contains('square') && squareClicked.innerHTML === '';
+        if (squareEmpty) {
             // Place Mark
-            e.target.innerHTML = currentPlayer.getMark();
-            e.target.setAttribute('id', currentPlayer.getNumber());
+            squareClicked.innerHTML = currentPlayer.getMark();
+            squareClicked.setAttribute('id', currentPlayer.getNumber());
+            // Check if the game has ended or not
+            hasGameEnded(squareClicked);
             // Change Player
             if (currentPlayer === playerOne) currentPlayer = playerTwo;
             else currentPlayer = playerOne;
-            // Check if the game has ended or not
-            hasGameEnded();
             // Next Turn
             // turns++;
             console.log(turns++);
