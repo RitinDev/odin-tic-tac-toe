@@ -37,43 +37,42 @@ const Player = (number, type, mark) => {
 
 // Game module
 let Game = (() => {
+    // "Global variables" for the Game module
     Gameboard.createPlayingGrid();
-
-    let turns = 1;
     let playerOne = Player(1, 'player', x);
-    let PlayerTwo = Player(2, vsOption, o);
+    let playerTwo = Player(2, vsOption, o);
+    let turns = 1;
     let gameEnded = false;
+    let getStartingPlayer = () => {
+        let players = [playerOne, playerTwo]
+        return players[Math.floor(Math.random() * players.length)];
+    }
+    let currentPlayer = getStartingPlayer();
 
-    let playTurn = () => {
-        let player = choosePlayer();
-        if (player === playerOne) {
-            chooseSquareHuman(playerOne);
-        } else {
-            chooseSquareHuman(PlayerTwo);
+
+    // Function to play each turn of the game, check if game ended or not, and proceed to next turn
+    playGame = (e) => {
+        if (e.target.classList.contains('square') && e.target.innerHTML === '') {
+            // Place Mark
+            e.target.innerHTML = currentPlayer.getMark();
+            e.target.setAttribute('id', currentPlayer.getNumber());
+            // Change Player
+            if (currentPlayer === playerOne) currentPlayer = playerTwo;
+            else currentPlayer = playerOne;
+            // Check if the game has ended or not
+            hasGameEnded();
+            // Next Turn
+            // turns++;
+            console.log(turns++);
         }
     }
 
-    let chooseSquareHuman = (player) => {
-        playingGrid.addEventListener('click', (e) => {
-            if (e.target.classList.contains('square') && e.target.innerHTML === '') {
-                e.target.innerHTML = player.getMark();
-                validSquareChosen = true;
-                turns++;
-            }
-            playTurn.call(this, e);
-        }, { once: true });
-
+    // Function to check if game has ended or not
+    let hasGameEnded = () => {
+        if (turns >= 9) {
+            gameEnded = true;
+        }
     }
 
-    let choosePlayer = () => {
-        if (turns % 2 != 0) return playerOne;
-        return PlayerTwo;
-    }
-
-    let nextTurn = () => {
-        turns++;
-    }
-
-
-    if (!gameEnded) playTurn();
+    playingGrid.addEventListener('click', playGame);
 })();
