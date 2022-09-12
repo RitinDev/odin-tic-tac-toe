@@ -19,7 +19,12 @@ let Gameboard = (() => {
         }
     }
 
-    return { createPlayingGrid }
+    let getSquare = (index) => {
+        let squareSelector = `div.playing-grid > div.square.\\3${index}`;
+        return document.querySelector(squareSelector);
+    }
+
+    return { createPlayingGrid, getSquare }
 })();
 
 // Factory function to produce players
@@ -67,9 +72,49 @@ let Game = (() => {
 
     // Function to check if game has ended or not
     let hasGameEnded = () => {
-        if (turns >= 9) {
-            gameEnded = true;
-        }
+        checkWinHorizontal();
+        checkWinVertical();
+        checkWinDiagonal();
+        if (turns >= 9) gameEnded = true;
+
+        if (gameEnded) {
+            playingGrid.removeEventListener('click', playGame);
+            console.log('Game Over!');
+        };
+    }
+
+    let checkWinHelper = (squareOne, squareTwo, squareThree) => {
+        if (!squareOne.id) return false;
+        if (!squareTwo.id) return false;
+        if (!squareThree.id) return false;
+        return (squareOne.id === squareTwo.id && squareOne.id === squareThree.id);
+    }
+
+    const zero = Gameboard.getSquare(0);
+    const one = Gameboard.getSquare(1);
+    const two = Gameboard.getSquare(2);
+    const three = Gameboard.getSquare(3);
+    const four = Gameboard.getSquare(4);
+    const five = Gameboard.getSquare(5);
+    const six = Gameboard.getSquare(6);
+    const seven = Gameboard.getSquare(7);
+    const eight = Gameboard.getSquare(8);
+
+    let checkWinHorizontal = () => {
+        if (checkWinHelper(zero, one, two) ||
+            checkWinHelper(three, four, five) ||
+            checkWinHelper(six, seven, eight)) gameEnded = true;
+    }
+
+    let checkWinVertical = () => {
+        if (checkWinHelper(zero, three, six) ||
+            checkWinHelper(one, four, seven) ||
+            checkWinHelper(two, five, eight)) gameEnded = true;
+    }
+
+    let checkWinDiagonal = () => {
+        if (checkWinHelper(zero, four, eight) ||
+            checkWinHelper(two, four, six)) gameEnded = true;
     }
 
     playingGrid.addEventListener('click', playGame);
