@@ -24,7 +24,16 @@ let Gameboard = (() => {
         return document.querySelector(squareSelector);
     }
 
-    return { createPlayingGrid, getSquare }
+    let clearBoard = () => {
+        let squares = playingGrid.querySelectorAll('.square');
+        squares.forEach(square => {
+            square.innerHTML = '';
+            square.removeAttribute('id');
+            square.style.backgroundColor = '';
+        });
+    }
+
+    return { createPlayingGrid, getSquare, clearBoard }
 })();
 
 // Factory function to produce players
@@ -65,8 +74,8 @@ let Game = (() => {
             if (currentPlayer === playerOne) currentPlayer = playerTwo;
             else currentPlayer = playerOne;
             // Next Turn
-            // turns++;
-            console.log(turns++);
+            turns++;
+            // console.log(turns++);
         }
     }
 
@@ -80,6 +89,9 @@ let Game = (() => {
         if (gameEnded) {
             playingGrid.removeEventListener('click', playGame);
             console.log('Game Over!');
+            setTimeout(() => {
+                resetGame();
+            }, 2500);
         };
     }
 
@@ -151,6 +163,14 @@ let Game = (() => {
             currentPlayer.winner = true;
             gameEnded = true;
         }
+    }
+
+    let resetGame = () => {
+        Gameboard.clearBoard();
+        gameEnded = false;
+        turns = 1;
+        currentPlayer = getStartingPlayer();
+        playingGrid.addEventListener('click', playGame);
     }
 
     playingGrid.addEventListener('click', playGame);
