@@ -28,12 +28,12 @@ let Gameboard = (() => {
 })();
 
 // Factory function to produce players
-const Player = (number, type, mark) => {
+const Player = (number, type, mark, winner = false) => {
     let getNumber = () => number;
     let getType = () => type;
     let getMark = () => mark;
 
-    return { getNumber, getType, getMark };
+    return { getNumber, getType, getMark, winner };
 }
 
 // Game module
@@ -99,22 +99,58 @@ let Game = (() => {
     const six = Gameboard.getSquare(6);
     const seven = Gameboard.getSquare(7);
     const eight = Gameboard.getSquare(8);
+    const winningTileColor = 'var(--selection-yellow)';
 
     let checkWinHorizontal = () => {
-        if (checkWinHelper(zero, one, two) ||
-            checkWinHelper(three, four, five) ||
-            checkWinHelper(six, seven, eight)) gameEnded = true;
+        if (checkWinHelper(zero, one, two)) {
+            let temp = [zero, one, two];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        } else if (checkWinHelper(three, four, five)) {
+            let temp = [three, four, five];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        } else if (checkWinHelper(six, seven, eight)) {
+            let temp = [six, seven, eight];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        }
     }
 
     let checkWinVertical = () => {
-        if (checkWinHelper(zero, three, six) ||
-            checkWinHelper(one, four, seven) ||
-            checkWinHelper(two, five, eight)) gameEnded = true;
+        if (checkWinHelper(zero, three, six)) {
+            let temp = [zero, three, six];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        } else if (checkWinHelper(one, four, seven)) {
+            let temp = [one, four, seven];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        } else if (checkWinHelper(two, five, eight)) {
+            let temp = [two, five, eight];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        }
     }
 
     let checkWinDiagonal = () => {
-        if (checkWinHelper(zero, four, eight) ||
-            checkWinHelper(two, four, six)) gameEnded = true;
+        if (checkWinHelper(zero, four, eight)) {
+            let temp = [zero, four, eight];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        } else if (checkWinHelper(two, four, six)) {
+            let temp = [two, four, six];
+            temp.forEach(square => square.style.backgroundColor = winningTileColor);
+            currentPlayer.winner = true;
+            gameEnded = true;
+        }
     }
 
     playingGrid.addEventListener('click', playGame);
