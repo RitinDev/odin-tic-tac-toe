@@ -1,6 +1,7 @@
 const x = `<i class="fa-solid fa-x"></i>`;
 const o = `<i class="fa-regular fa-circle"></i>`;
 const playingGrid = document.querySelector('.playing-grid')
+const vsButton = document.querySelector('#player-type-drop-down');
 const vsOption = document.querySelector('#player-type-drop-down').value;
 
 // Gameboard module
@@ -172,6 +173,7 @@ let Game = (() => {
         currentPlayer = getStartingPlayer();
         playingGrid.addEventListener('click', playGame);
     }
+    vsButton.addEventListener('change', resetGame);
 
     playingGrid.addEventListener('click', playGame);
 })();
