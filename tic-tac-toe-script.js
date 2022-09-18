@@ -331,6 +331,11 @@ let Game = (() => {
     }
 
     let placeAISquareNoPressure = (previousTurn) => {
+        if (!four.id) {
+            four.innerHTML = currentPlayer.getMark();
+            four.setAttribute('id', currentPlayer.getNumber());
+            return;
+        }
         if (previousTurn === zero || previousTurn === two) {
             if (!one.id) {
                 one.innerHTML = currentPlayer.getMark();
