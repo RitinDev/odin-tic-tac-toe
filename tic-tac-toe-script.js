@@ -2,7 +2,6 @@ const x = `<i class="fa-solid fa-x"></i>`;
 const o = `<i class="fa-regular fa-circle"></i>`;
 const playingGrid = document.querySelector('.playing-grid')
 const vsButton = document.querySelector('#player-type-drop-down');
-const vsOption = document.querySelector('#player-type-drop-down').value;
 
 // Gameboard module
 let Gameboard = (() => {
@@ -50,20 +49,25 @@ const Player = (number, type, mark, winner = false) => {
 let Game = (() => {
     // "Global variables" for the Game module
     Gameboard.createPlayingGrid();
+    let vsOption = document.querySelector('#player-type-drop-down').value;
     let playerOne = Player(1, 'player', x);
     let playerTwo = Player(2, vsOption, o);
     let turns = 1;
     let gameEnded = false;
     let getStartingPlayer = () => {
+        if (playerTwo.getType() == 'cpu') return playerOne;
+
         let players = [playerOne, playerTwo]
         return players[Math.floor(Math.random() * players.length)];
     }
     let currentPlayer = getStartingPlayer();
+    let previousTurn;
 
 
     // Function to play each turn of the game, check if game ended or not, and proceed to next turn
     playGame = (e) => {
         let squareClicked = e.target;
+        previousTurn = Gameboard.getSquare(e.target.classList[1]);
         let squareEmpty = squareClicked.classList.contains('square') && squareClicked.innerHTML === '';
         if (squareEmpty) {
             // Place Mark
@@ -74,6 +78,14 @@ let Game = (() => {
             // Change Player
             if (currentPlayer === playerOne) currentPlayer = playerTwo;
             else currentPlayer = playerOne;
+            // Play AI's turn if playing against CPU
+            if (currentPlayer == playerTwo && playerTwo.getType() == 'cpu') {
+                setTimeout(() => {
+                    playAITurn(previousTurn);
+                    currentPlayer = playerOne
+                    hasGameEnded();
+                }, 250);
+            }
             // Next Turn
             turns++;
             // console.log(turns++);
@@ -166,14 +178,24 @@ let Game = (() => {
         }
     }
 
+    let updateVsOption = () => {
+        vsOption = document.querySelector('#player-type-drop-down').value;
+    }
+
     let resetGame = () => {
         Gameboard.clearBoard();
         gameEnded = false;
         turns = 1;
+        updateVsOption();
+        playerTwo = Player(2, vsOption, o);
         currentPlayer = getStartingPlayer();
         playingGrid.addEventListener('click', playGame);
     }
     vsButton.addEventListener('change', resetGame);
+
+    let playAITurn = (previousTurn) => {
+        
+    }
 
     playingGrid.addEventListener('click', playGame);
 })();
