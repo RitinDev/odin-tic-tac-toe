@@ -55,7 +55,7 @@ let Game = (() => {
     let turns = 1;
     let gameEnded = false;
     let getStartingPlayer = () => {
-        if (playerTwo.getType() == 'cpu') return playerOne;
+        if (playerTwo.getType() === 'cpu') return playerOne;
 
         let players = [playerOne, playerTwo]
         return players[Math.floor(Math.random() * players.length)];
@@ -79,16 +79,17 @@ let Game = (() => {
             if (currentPlayer === playerOne) currentPlayer = playerTwo;
             else currentPlayer = playerOne;
             // Play AI's turn if playing against CPU
-            if (currentPlayer == playerTwo && playerTwo.getType() == 'cpu') {
+            if (currentPlayer === playerTwo && playerTwo.getType() === 'cpu') {
                 setTimeout(() => {
                     playAITurn(previousTurn);
-                    currentPlayer = playerOne
+                    currentPlayer = playerOne;
                     hasGameEnded();
+                    turns++;
                 }, 250);
             }
             // Next Turn
-            turns++;
-            // console.log(turns++);
+            // turns++;
+            console.log(turns++);
         }
     }
 
@@ -194,7 +195,193 @@ let Game = (() => {
     vsButton.addEventListener('change', resetGame);
 
     let playAITurn = (previousTurn) => {
-        
+        if (previousTurn === zero) {
+            if (four.id === '1') {
+                eight.innerHTML = currentPlayer.getMark();
+                eight.setAttribute('id', currentPlayer.getNumber());
+            } else if (one.id === '1') {
+                two.innerHTML = currentPlayer.getMark();
+                two.setAttribute('id', currentPlayer.getNumber());
+            } else if (three.id === '1') {
+                six.innerHTML = currentPlayer.getMark();
+                six.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === one) {
+            if (four.id === '1') {
+                seven.innerHTML = currentPlayer.getMark();
+                seven.setAttribute('id', currentPlayer.getNumber());
+            } else if (zero.id === '1') {
+                two.innerHTML = currentPlayer.getMark();
+                two.setAttribute('id', currentPlayer.getNumber());
+            } else if (two.id === '1') {
+                zero.innerHTML = currentPlayer.getMark();
+                zero.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === two) {
+            if (four.id === '1') {
+                six.innerHTML = currentPlayer.getMark();
+                six.setAttribute('id', currentPlayer.getNumber());
+            } else if (one.id === '1') {
+                zero.innerHTML = currentPlayer.getMark();
+                zero.setAttribute('id', currentPlayer.getNumber());
+            } else if (five.id === '1') {
+                eight.innerHTML = currentPlayer.getMark();
+                eight.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === three) {
+            if (four.id === '1') {
+                five.innerHTML = currentPlayer.getMark();
+                five.setAttribute('id', currentPlayer.getNumber());
+            } else if (zero.id === '1') {
+                six.innerHTML = currentPlayer.getMark();
+                six.setAttribute('id', currentPlayer.getNumber());
+            } else if (six.id === '1') {
+                zero.innerHTML = currentPlayer.getMark();
+                zero.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === four) {
+            if (zero.id === '1') {
+                eight.innerHTML = currentPlayer.getMark();
+                eight.setAttribute('id', currentPlayer.getNumber());
+            } else if (one.id === '1') {
+                seven.innerHTML = currentPlayer.getMark();
+                seven.setAttribute('id', currentPlayer.getNumber());
+            } else if (two.id === '1') {
+                six.innerHTML = currentPlayer.getMark();
+                six.setAttribute('id', currentPlayer.getNumber());
+            } else if (three.id === '1') {
+                five.innerHTML = currentPlayer.getMark();
+                five.setAttribute('id', currentPlayer.getNumber());
+            } else if (five.id === '1') {
+                three.innerHTML = currentPlayer.getMark();
+                three.setAttribute('id', currentPlayer.getNumber());
+            } else if (six.id === '1') {
+                two.innerHTML = currentPlayer.getMark();
+                two.setAttribute('id', currentPlayer.getNumber());
+            } else if (seven.id === '1') {
+                one.innerHTML = currentPlayer.getMark();
+                one.setAttribute('id', currentPlayer.getNumber());
+            } else if (eight.id === '1') {
+                zero.innerHTML = currentPlayer.getMark();
+                zero.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === five) {
+            if (four.id === '1') {
+                three.innerHTML = currentPlayer.getMark();
+                three.setAttribute('id', currentPlayer.getNumber());
+            } else if (two.id === '1') {
+                eight.innerHTML = currentPlayer.getMark();
+                eight.setAttribute('id', currentPlayer.getNumber());
+            } else if (eight.id === '1') {
+                two.innerHTML = currentPlayer.getMark();
+                two.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === six) {
+            if (four.id === '1') {
+                two.innerHTML = currentPlayer.getMark();
+                two.setAttribute('id', currentPlayer.getNumber());
+            } else if (three.id === '1') {
+                zero.innerHTML = currentPlayer.getMark();
+                zero.setAttribute('id', currentPlayer.getNumber());
+            } else if (seven.id === '1') {
+                eight.innerHTML = currentPlayer.getMark();
+                eight.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === seven) {
+            if (four.id === '1') {
+                one.innerHTML = currentPlayer.getMark();
+                one.setAttribute('id', currentPlayer.getNumber());
+            } else if (six.id === '1') {
+                eight.innerHTML = currentPlayer.getMark();
+                eight.setAttribute('id', currentPlayer.getNumber());
+            } else if (eight.id === '1') {
+                six.innerHTML = currentPlayer.getMark();
+                six.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        } else if (previousTurn === eight) {
+            if (four.id === '1') {
+                zero.innerHTML = currentPlayer.getMark();
+                zero.setAttribute('id', currentPlayer.getNumber());
+            } else if (five.id === '1') {
+                two.innerHTML = currentPlayer.getMark();
+                two.setAttribute('id', currentPlayer.getNumber());
+            } else if (seven.id === '1') {
+                six.innerHTML = currentPlayer.getMark();
+                six.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                placeAISquareNoPressure(previousTurn);
+            }
+        }
+    }
+
+    let placeAISquareNoPressure = (previousTurn) => {
+        if (previousTurn === zero || previousTurn === two) {
+            if (!one.id) {
+                one.innerHTML = currentPlayer.getMark();
+                one.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                AIPlayMiddles();
+            }
+        } else if (previousTurn === six || previousTurn === eight) {
+            if (!seven.id) {
+                seven.innerHTML = currentPlayer.getMark();
+                seven.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                AIPlayMiddles();
+            }
+        } else {
+            AIPlayMiddles();
+        }
+    }
+
+    let AIPlayMiddles = () => {
+        let movePlayed = false;
+        if (!four.id) {
+            four.innerHTML = currentPlayer.getMark();
+            four.setAttribute('id', currentPlayer.getNumber());
+            movePlayed = true;
+        } else {
+            let choices = []
+            if (!one.id) choices.push(one);
+            if (!three.id) choices.push(three);
+            if (!five.id) choices.push(five);
+            if (!seven.id) choices.push(seven);
+
+            if (!choices.length == 0) {
+                let squarePicked = choices[Math.floor(Math.random() * choices.length)]
+                squarePicked.innerHTML = currentPlayer.getMark();
+                squarePicked.setAttribute('id', currentPlayer.getNumber());
+                movePlayed = true;
+            }
+        }
+        if (!movePlayed) {
+            let choices = []
+            if (!zero.id) choices.push(zero);
+            if (!two.id) choices.push(two);
+            if (!six.id) choices.push(six);
+            if (!eight.id) choices.push(eight);
+            if (!choices.length == 0) {
+                let squarePicked = choices[Math.floor(Math.random() * choices.length)]
+                squarePicked.innerHTML = currentPlayer.getMark();
+                squarePicked.setAttribute('id', currentPlayer.getNumber());
+            }
+        }
     }
 
     playingGrid.addEventListener('click', playGame);
