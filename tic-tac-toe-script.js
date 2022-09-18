@@ -79,7 +79,7 @@ let Game = (() => {
             if (currentPlayer === playerOne) currentPlayer = playerTwo;
             else currentPlayer = playerOne;
             // Play AI's turn if playing against CPU
-            if (currentPlayer === playerTwo && playerTwo.getType() === 'cpu') {
+            if (!gameEnded && currentPlayer === playerTwo && playerTwo.getType() === 'cpu') {
                 setTimeout(() => {
                     playAITurn(previousTurn);
                     currentPlayer = playerOne;
