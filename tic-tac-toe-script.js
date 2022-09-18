@@ -336,15 +336,41 @@ let Game = (() => {
             four.setAttribute('id', currentPlayer.getNumber());
             return;
         }
-        if (previousTurn === zero || previousTurn === two) {
-            if (!one.id) {
+        if (previousTurn === zero) {
+            if (two.id) {
                 one.innerHTML = currentPlayer.getMark();
                 one.setAttribute('id', currentPlayer.getNumber());
+            } else if (six.id) {
+                three.innerHTML = currentPlayer.getMark();
+                three.setAttribute('id', currentPlayer.getNumber());
             } else {
                 AIPlayMiddles();
             }
-        } else if (previousTurn === six || previousTurn === eight) {
-            if (!seven.id) {
+        } else if (previousTurn === two) {
+            if (zero.id) {
+                one.innerHTML = currentPlayer.getMark();
+                one.setAttribute('id', currentPlayer.getNumber());
+            } else if (eight.id) {
+                five.innerHTML = currentPlayer.getMark();
+                five.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                AIPlayMiddles();
+            }
+        } else if (previousTurn === six) {
+            if (zero.id) {
+                three.innerHTML = currentPlayer.getMark();
+                three.setAttribute('id', currentPlayer.getNumber());
+            } else if (eight.id) {
+                seven.innerHTML = currentPlayer.getMark();
+                seven.setAttribute('id', currentPlayer.getNumber());
+            } else {
+                AIPlayMiddles();
+            }
+        } else if (previousTurn === eight) {
+            if (two.id) {
+                five.innerHTML = currentPlayer.getMark();
+                five.setAttribute('id', currentPlayer.getNumber());
+            } else if (six.id) {
                 seven.innerHTML = currentPlayer.getMark();
                 seven.setAttribute('id', currentPlayer.getNumber());
             } else {
