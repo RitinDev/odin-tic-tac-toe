@@ -335,6 +335,11 @@ let Game = (() => {
             four.innerHTML = currentPlayer.getMark();
             four.setAttribute('id', currentPlayer.getNumber());
             return;
+        } else {
+            if (turns <= 2) {
+                zero.innerHTML = currentPlayer.getMark();
+                zero.setAttribute('id', currentPlayer.getNumber());
+            }
         }
         if (previousTurn === zero) {
             if (two.id) {
